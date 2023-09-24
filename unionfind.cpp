@@ -28,4 +28,5 @@ struct UnionFind {
 		siz[x] += siz[y];
 		return true;
 	}
+}
 
