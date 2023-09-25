@@ -16,6 +16,7 @@ void bfs(Graph &G, int s, vector<int>&dist){
             que.push(G[next_s][i]);
         }
     }
+    return ;
 }
 int main() {
     int N, M;
@@ -34,4 +35,5 @@ int main() {
     for (int i = 1; i <= N; i++) {
         cout << dist[i] << endl;
     }
+    return 0;
 }
