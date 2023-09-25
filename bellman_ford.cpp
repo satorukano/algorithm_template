@@ -16,7 +16,7 @@ using Graph = vector<vector<Edge>>;
 template<class T> bool chmin(T &a, T b) {
     if (a > b) {
         a = b;
-        retrun true;
+        return true;
     }else return false;
 }
 
@@ -29,6 +29,8 @@ int main() {
         ll a, b, w;
         cin >> a >> b >> w;
         G[a].push_back(Edge(b, w));
+        // 入力形式による
+        G[b].push_back(Edge(a, w));
     }
 
     bool exist_negative_cycle = false;
