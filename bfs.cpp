@@ -10,10 +10,10 @@ void bfs(Graph &G, int s, vector<int>&dist){
     while(!que.empty()) {
         int next_s = que.front();
         que.pop();
-        for (int i = 0; i < G[next_s].size(); i++) {
-            if (dist[G[next_s][i]] != -1) continue;
-            dist[G[next_s][i]] = dist[next_s] + 1;
-            que.push(G[next_s][i]);
+        for (auto i :G[next_s]) {
+            if (dist[i] != -1) continue;
+            dist[i] = dist[next_s] + 1;
+            que.push(i);
         }
     }
     return ;

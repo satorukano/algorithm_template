@@ -40,8 +40,8 @@ int main() {
         bool updated = false;
         for (ll v = 1; v <= N; v++) {
             if (dist[v] == INF) continue;
-            for (ll i = 0; i < G[v].size(); i++) {
-                if (chmin(dist[G[v][i].to], dist[v] + G[v][i].w)) {
+            for (auto e: G[v]) {
+                if (chmin(dist[e.to], dist[v] + e.w)) {
                     updated = true;
                 }
             }

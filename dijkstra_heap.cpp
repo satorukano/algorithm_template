@@ -1,9 +1,10 @@
 #include<iostream>
 #include<vector>
+#include<queue>
 using namespace std;
 using ll = long long;
 
-const ll INF = 1ll << 60;
+const ll INF = 1LL << 60;
 
 struct Edge {
     ll to;
@@ -32,30 +33,30 @@ int main() {
         // inputによる
         G[b].push_back(Edge(a, w));
     }
-    vector<bool> used(N + 1, false);
-    vector<ll> dist(N+1, INF);
+
+    vector<ll> dist(N + 1, INF);
     dist[s] = 0;
-    for (ll iter = 0ll; iter < N; iter++) {
-        ll min_dist = INF;
-        ll min_v = -1ll;
-        for (ll v = 0; v < N; v++) {
-            if (!used[v] && dist[v] < min_dist) {
-                min_dist = dist[v];
-                min_v = v;
+    priority_queue<pair<ll, ll>,
+                   vector<pair<ll, ll>>,
+                   greater<pair<ll, ll>>> que;
+    que.push(make_pair(dist[s], s));
+    while(!que.empty()) {
+        ll v = que.top().second;
+        ll d = que.top().first;
+        que.pop();
+
+        if (d > dist[v]) continue;
+
+        for (auto e : G[v]) {
+            if (chmin(dist[e.to], dist[v] + e.w)) {
+                que.push(make_pair(dist[e.to], e.to));
             }
-
         }
-
-        if (min_v == -1ll) break ;
-
-        for (auto e: G[min_v]) {
-            chmin(dist[e.to], dist[min_v] + e.w);
-        }
-        used[min_v] = true;
     }
 
-    for (ll i = 1ll; i <= N; i++) {
-        if (dist[i] < INF) cout << dist[i] << endl;
+    for (ll v = 1; v <= N; v++) {
+        if (dist[v] < INF) cout << dist[v] << endl;
         else cout << -1 << endl;
     }
+    return 0;
 }
