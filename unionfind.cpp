@@ -24,9 +24,9 @@ struct UnionFind {
 
 		if(siz[x] < siz[y]) swap(x, y);
 
-		par(y) = x;
+		par[y] = x;
 		siz[x] += siz[y];
 		return true;
 	}
-}
+};
 
