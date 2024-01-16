@@ -16,7 +16,6 @@ void quick_sort(vector<int> &vec, int left, int right) {
         }
     }
     swap(vec[partition], vec[right-1]);
-    for (int i = left; i < right; i++) cout << vec.at(i) <<' ';
     cout << endl;
     quick_sort(vec, left, partition);
     quick_sort(vec, partition+1, right);
