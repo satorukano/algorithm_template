@@ -5,20 +5,16 @@ using namespace std;
 struct Node {
     vector<int> child;
     int parent;
+    int depth;
 };
 
-int depth(int u, vector<Node> Tree, vector<int> &dep) {
-    int parent = Tree[u].parent;
-    int depth = 0;
-    if (dep[parent] != -1 && parent != -1) return dep[parent] + 1;
-    else {
-        while (parent != -1) {
-            parent = Tree[parent].parent;
-            depth++;
-        }
-        dep[u] = depth;
-        return depth;
-    } 
+void search_depth(int u, vector<Node> &Tree) {
+    if (Tree[u].child.size() == 0) return;
+
+    for (int i = 0; i < Tree[u].child.size(); i++) {
+        Tree[Tree[u].child[i]].depth = Tree[u].depth + 1;
+        search_depth(Tree[u].child[i], Tree);
+    }
 }
 
 int main() {
@@ -40,11 +36,15 @@ int main() {
             tree[chl].parent = id;
         }
     }
-    vector<int> dep(n, -1);
+    int par = 0;
+    for (int i = 0; i < n; i++) {
+        if (tree[i].parent == -1) par = i;
+    }
+    search_depth(par, tree);
     for (int i = 0; i < n; i++) {
         cout << "node " << i << ": ";
         cout << "parent = " << tree[i].parent << ", ";
-        cout << "depth = " << depth(i, tree, dep) << ", ";
+        cout << "depth = " << tree[i].depth << ", ";
         if (tree[i].parent == -1) cout << "root" << ", ";
         else if (tree[i].child.size() > 0) cout << "internal node" << ", ";
         else cout << "leaf" << ", ";
