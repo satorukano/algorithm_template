@@ -6,3 +6,5 @@
 using namespace std;
 
 // TODO: Implement the function
+
+// TODO it is example of the function
